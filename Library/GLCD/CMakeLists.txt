@@ -1,0 +1,27 @@
+
+ADD_LIBRARY(
+    GLCD
+    MCvMDistance.cpp
+    MCvMDistanceAsym.cpp
+    MCvMDistanceSym.cpp
+    MCvMDistanceSymEven.cpp
+    MCvMDistanceSymOdd.cpp
+    MCvMDistanceOptimizer.cpp
+    Misc.cpp
+    ExpInt.cpp
+    Computation.cpp
+)
+
+TARGET_LINK_LIBRARIES(
+    GLCD
+    Quadrature
+    Optimization
+)
+
+INSTALL(TARGETS GLCD
+        LIBRARY DESTINATION "lib/libGLCD")
+
+INSTALL(DIRECTORY "."
+        DESTINATION "include/libGLCD/GLCD"
+        FILES_MATCHING PATTERN "*.h")
+
