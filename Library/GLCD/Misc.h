@@ -27,11 +27,29 @@
 
 namespace GLCD {
 
+template<typename Derived>
 void meanCorrection(const Eigen::MatrixXd& samples,
-                    Eigen::MatrixXd& correctedSamples);
+                    Eigen::MatrixBase<Derived>& correctedSamples)
+{
+    const Eigen::MatrixXd::Index numSamples = samples.cols();
+    const double weight = 1.0 / numSamples;
+    
+    const Eigen::VectorXd mean = weight * samples.rowwise().sum();
+    
+    correctedSamples = samples.colwise() - mean;
+}
 
+template<typename Derived>
 void covarianceCorrection(const Eigen::MatrixXd& samples,
-                          Eigen::MatrixXd& correctedSamples);
+                          Eigen::MatrixBase<Derived>& correctedSamples)
+{
+    const Eigen::MatrixXd::Index numSamples = samples.cols();
+    const double weight = 1.0 / numSamples;
+    
+    const Eigen::MatrixXd cov = weight * (samples * samples.transpose());
+    
+    correctedSamples = cov.inverse().llt().matrixL().transpose() * samples;
+}
 
 void stdNormalRndMatrix(unsigned int rows,
                         unsigned int cols,

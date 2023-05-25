@@ -10,6 +10,7 @@ ADD_LIBRARY(
     Misc.cpp
     ExpInt.cpp
     Computation.cpp
+    GLCD_C_Wrapper.cpp
 )
 
 set(GLCD_LINK_LIBRARIES Quadrature Optimization)

@@ -25,28 +25,6 @@
     
 namespace GLCD {
 
-void meanCorrection(const Eigen::MatrixXd& samples,
-                    Eigen::MatrixXd& correctedSamples)
-{
-    const Eigen::MatrixXd::Index numSamples = samples.cols();
-    const double weight = 1.0 / numSamples;
-    
-    const Eigen::VectorXd mean = weight * samples.rowwise().sum();
-    
-    correctedSamples = samples.colwise() - mean;
-}
-
-void covarianceCorrection(const Eigen::MatrixXd& samples,
-                          Eigen::MatrixXd& correctedSamples)
-{
-    const Eigen::MatrixXd::Index numSamples = samples.cols();
-    const double weight = 1.0 / numSamples;
-    
-    const Eigen::MatrixXd cov = weight * (samples * samples.transpose());
-    
-    correctedSamples = cov.inverse().llt().matrixL().transpose() * samples;
-}
-
 void stdNormalRndMatrix(unsigned int rows,
                         unsigned int cols,
                         Eigen::MatrixXd& rndMatrix)
@@ -64,7 +42,7 @@ void stdNormalRndMatrix(unsigned int rows,
     }
 }
 
-double normalizedCovError(const Eigen::MatrixXd& samples)
+double normalizedCovError(const Eigen::Ref<Eigen::MatrixXd>& samples)
 {
     const Eigen::MatrixXd::Index numSamples = samples.cols();
     const Eigen::MatrixXd::Index dim = samples.rows();
