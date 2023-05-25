@@ -12,11 +12,13 @@ ADD_LIBRARY(
     Computation.cpp
 )
 
-TARGET_LINK_LIBRARIES(
-    GLCD
-    Quadrature
-    Optimization
-)
+set(GLCD_LINK_LIBRARIES Quadrature Optimization)
+
+if(OpenMP_CXX_FOUND)
+    set(GLCD_LINK_LIBRARIES ${GLCD_LINK_LIBRARIES} OpenMP::OpenMP_CXX)
+endif()
+
+target_link_libraries(GLCD PUBLIC ${GLCD_LINK_LIBRARIES})
 
 INSTALL(TARGETS GLCD
         LIBRARY DESTINATION "lib/libGLCD")

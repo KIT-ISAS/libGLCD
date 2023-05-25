@@ -3,3 +3,4 @@ This is a standalone version of the deterministic Gaussian LCD sampling used in 
 
 ## Dependencies
 This library requires Eigen3 to be installed.
+The library uses OpenMP for parallelization, if it is available.
