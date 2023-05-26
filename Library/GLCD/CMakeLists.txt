@@ -19,6 +19,7 @@ if(OpenMP_CXX_FOUND)
     set(GLCD_LINK_LIBRARIES ${GLCD_LINK_LIBRARIES} OpenMP::OpenMP_CXX)
 endif()
 
+target_compile_features(GLCD PUBLIC cxx_std_14)
 target_link_libraries(GLCD PUBLIC ${GLCD_LINK_LIBRARIES})
 
 INSTALL(TARGETS GLCD
