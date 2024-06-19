@@ -41,3 +41,5 @@ dependencies = [
 
 # Build the tarballs, and possibly a `build.jl` as well.
 build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; julia_compat="1.6", preferred_gcc_version = v"7.1.0")
+
+# CALL WITH: julia build_tarballs.jl --skip-build --deploy=local
